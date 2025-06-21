@@ -1,4 +1,4 @@
-![Banco de musicas](https://github.com/user-attachments/assets/838f507b-d5b8-4b50-9d65-f0d8880cc6ac)
+![Ilustração de um ícone de Banco de Dados e um disco em fundo azul estilizado.](https://github.com/user-attachments/assets/8e3a0ce9-4633-4573-9b7c-367059e82d0a)
 
 # 🎵 Praticando SQL com Banco Musical
 
