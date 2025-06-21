@@ -1,3 +1,5 @@
+![Banco de musicas](https://github.com/user-attachments/assets/838f507b-d5b8-4b50-9d65-f0d8880cc6ac)
+
 # 🎵 Praticando SQL com Banco Musical
 
 Este repositório foi criado com o objetivo de aprimorar minhas habilidades em Structured Query Language (SQL), utilizando um banco de dados de bandas e álbuns que eu curto. A ideia é simular cenários do mundo real para construir e otimizar minhas queries.
