@@ -31,7 +31,7 @@ O repositório está organizado da seguinte forma:
 
 ---
 
-## 🗄️ Estrutura do Banco de Dados
+## 🗃️ Estrutura do Banco de Dados
 
 Para facilitar a compreensão, aqui está a estrutura das tabelas:
 
