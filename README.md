@@ -4,7 +4,7 @@
 
 Este repositório foi criado com o objetivo de aprimorar minhas habilidades em Structured Query Language (SQL), utilizando um banco de dados de bandas e álbuns que eu curto. A ideia é simular cenários do mundo real para construir e otimizar minhas queries.
 
-Acho importante ressaltar que a base de dados, incluindo seu schema e os dados inseridos, foi gerada com o auxílio de uma Inteligência Artificial. Por isso, pode haver pequenas inconsistências ou imprecisões nos registros (como datas, gêneros ou nacionalidades). O objetivo principal deste repositório é a prática de SQL, então não considere essas informações como uma fonte enciclopédica de dados musicais. 
+Acho importante ressaltar que a base de dados foi gerada com o auxílio de uma Inteligência Artificial. Por isso, pode haver pequenas inconsistências ou imprecisões nos registros (como datas, gêneros ou nacionalidades). O objetivo principal deste repositório é a prática de SQL, então não considere essas informações como uma fonte enciclopédica de dados musicais. 
 
 Sinta-se à vontade para corrigir ou reportar qualquer erro que encontrar!
 
