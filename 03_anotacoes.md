@@ -11,7 +11,8 @@ INSERT INTO albuns (id, titulo, ano, banda_id) VALUES
   (SELECT id FROM bandas WHERE nome = 'The Galactic Cats'));
 ```
 Da mesma forma, é interessante repensar a inserção dos álbuns na tabela `albuns`: eles são referenciados manualmente na chave estrangeira `banda_id`, o que pode gerar erros.
+
  
 ## Semana 2: 
-Importante praticar o uso de `JOINs`, antentando-me ao seu uso em conjunto com a cláusula `ON`.
-Recomendado também utilizar `AS` para renomear colunas ou resultados, afim de melhorar a legibilidade e a interpretação dos dados 
+Importante praticar o uso de `JOINs`, me atentando ao seu uso em conjunto com a cláusula `ON`.
+Recomendado também utilizar `AS` para renomear colunas ou resultados, a fim de melhorar a legibilidade e a interpretação dos dados. 
