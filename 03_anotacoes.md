@@ -25,3 +25,5 @@ INSERT INTO bandas (id, nome, genero, ano, nacionalidade) VALUES
 (default, 'Ozzy Osbourne', 'Heavy Metal', 1980, 'Inglaterra'),
 (default, 'Demons & Wizards', 'Power Metal', 1999, 'EUA / Alemanha');
 ```
+Com base nos estudos desta semana, acredito que será necessário continuar praticando o uso de `JOIN`, principalmente em consultas mais complexas. Além disso, para garantir que os agrupamentos e filtros sejam feitos de modo eficiente, preciso aprimorar o uso do `GROUP BY` e do `HAVING`.  
+Foi também meu primeiro contato com a função `length()`. Para expandir meu repertório, farei uma prática futura com o uso de outras funções nativas da linguagem. 
