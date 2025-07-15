@@ -57,3 +57,7 @@ INSERT INTO albuns (id, titulo, ano, banda_id) VALUES
 (default, 'Waiting for the Sun', 1968, (SELECT id FROM bandas WHERE nome = 'The Doors')),
 (default, 'Morrison Hotel', 1970, (SELECT id FROM bandas WHERE nome = 'The Doors'));
 ```
+**_Exercício 9_**:  
+Tive dificuldades em resolver esse exercício. Apesar de, mentalmente, conseguir quebrar o problema em etapas menores, encontrei uma barreira no domínio técnico para traduzir essa lógica em SQL.  
+Para resolvê-lo, é preciso dominar melhor as **funções de manipulação de strings**, além do uso combinado de `GROUP BY` e `HAVING`. Ainda tenho certa dificuldade nesses pontos, especialmente ao lidar com condições mais complexas dentro de agrupamentos.  
+A próxima semana, portato, terá foco nessas dificuldades.
