@@ -60,4 +60,28 @@ INSERT INTO albuns (id, titulo, ano, banda_id) VALUES
 **_Exercício 9_**:  
 Tive dificuldades em resolver esse exercício. Apesar de, mentalmente, conseguir quebrar o problema em etapas menores, encontrei uma barreira no domínio técnico para traduzir essa lógica em SQL.  
 Para resolvê-lo, é preciso dominar melhor as **funções de manipulação de strings**, além do uso combinado de `GROUP BY` e `HAVING`. Ainda tenho certa dificuldade nesses pontos, especialmente ao lidar com condições mais complexas dentro de agrupamentos.  
-A próxima semana, portato, terá foco nessas dificuldades.
+A próxima semana, portato, terá foco nessas dificuldades.  
+
+# Semana 5:
+Nesta semana comecei a utilizar mais as **funções de manipulação de strings** e, para ajudar na prática, segue um resumo com as principais delas:
+### 📝 **Resumo: Funções de Manipulação de Strings em SQL**
+
+| Função                  | O que faz                                            | Exemplo                                | Resultado       |
+|-------------------------|------------------------------------------------------|----------------------------------------|-----------------|
+| `LENGTH()` / `CHAR_LENGTH()` | Conta o número de caracteres da string           | `LENGTH('The Doors')`                  | `9`             |
+| `LOWER()` / `UPPER()`   | Transforma todos os caracteres para minúsculo/maiúsculo | `LOWER('HELLO')`                     | `hello`         |
+| `TRIM()`                | Remove espaços em branco do início e fim da string  | `TRIM(' Hello ')`                      | `'Hello'`       |
+| `REPLACE()`             | Substitui parte da string por outra                 | `REPLACE('The Beatles', 'e', '3')`     | `'Th3 B3atl3s'` |
+| `SUBSTRING()` / `SUBSTR()` | Extrai parte da string                          | `SUBSTRING('Black Sabbath', 1, 5)`     | `'Black'`       |
+| `INSTR()` / `POSITION()` | Retorna a posição de um caractere na string        | `INSTR('Deep Purple', 'P')`            | `6`             |
+| `CONCAT()`              | Junta duas ou mais strings                          | `CONCAT('The ', 'Doors')`              | `'The Doors'`   |
+
+**_Exercício 4_**:  
+Foi utilizado o `LEFT JOIN` para que as bandas sem nenhum álbum cadastrado também pudessem ser contabilizadas.
+
+**_Exercício 6_**:   
+A função `length(titulo)` retorna a quantidade de caracteres do título do álbum.  
+A função `replace(titulo, ' ', '')` remove todos os espaços que o título do álbum possui. (Por exemplo, o álbum "Sabbath Blood Sabbath" passará a se chamar "SabbathBloodSabbath").  
+Se a diferença entre a quantidade de caracteres original e a quantidade de caracteres sem os espaços for maior ou igual à 2, significa que, pelo menos, dois espaços foram removidos.  
+E se pelo menos dois espaços foram removidos, então, o título do álbum possui, no mínimo, três palavras.  
+
