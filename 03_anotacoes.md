@@ -11,10 +11,14 @@ INSERT INTO albuns (id, titulo, ano, banda_id) VALUES
   (SELECT id FROM bandas WHERE nome = 'The Galactic Cats'));
 ```
 Da mesma forma, é interessante repensar a inserção dos álbuns na tabela `albuns`: eles são referenciados manualmente na chave estrangeira `banda_id`, o que pode gerar erros.
- 
+
+---
+
 # Semana 2: 
 Importante praticar o uso de `JOINs`, me atentando ao seu uso em conjunto com a cláusula `ON`.  
 Recomendado também utilizar `AS` para renomear colunas ou resultados, a fim de melhorar a legibilidade e a interpretação dos dados. 
+
+---
 
 # Semana 3: 
 ### Ajustes no Banco de Dados:
@@ -27,6 +31,8 @@ INSERT INTO bandas (id, nome, genero, ano, nacionalidade) VALUES
 ```
 Com base nos estudos desta semana, acredito que será necessário continuar praticando o uso de `JOIN`, principalmente em consultas mais complexas. Além disso, para garantir que os agrupamentos e filtros sejam feitos de modo eficiente, preciso aprimorar o uso do `GROUP BY` e do `HAVING`.  
 Foi também meu primeiro contato com a função `length()`. Para expandir meu repertório, farei uma prática futura com o uso de outras funções nativas da linguagem.
+
+---
 
 # Semana 4:
 ### Ajustes no Banco de Dados:
@@ -62,6 +68,8 @@ Tive dificuldades em resolver esse exercício. Apesar de, mentalmente, conseguir
 Para resolvê-lo, é preciso dominar melhor as **funções de manipulação de strings**, além do uso combinado de `GROUP BY` e `HAVING`. Ainda tenho certa dificuldade nesses pontos, especialmente ao lidar com condições mais complexas dentro de agrupamentos.  
 A próxima semana, portato, terá foco nessas dificuldades.  
 
+---
+
 # Semana 5:
 Nesta semana comecei a utilizar mais as **funções de manipulação de strings** e, para ajudar na prática, segue um resumo com as principais delas:
 ### 📝 **Resumo: Funções de Manipulação de Strings em SQL**
@@ -84,4 +92,6 @@ A função `length(titulo)` retorna a quantidade de caracteres do título do ál
 A função `replace(titulo, ' ', '')` remove todos os espaços que o título do álbum possui. (Por exemplo, o álbum "Sabbath Blood Sabbath" passará a se chamar "SabbathBloodSabbath").  
 Se a diferença entre a quantidade de caracteres original e a quantidade de caracteres sem os espaços for maior ou igual à 2, significa que, pelo menos, dois espaços foram removidos.  
 E se pelo menos dois espaços foram removidos, então, o título do álbum possui, no mínimo, três palavras.  
+
+---
 
