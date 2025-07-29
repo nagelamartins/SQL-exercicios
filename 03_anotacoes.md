@@ -95,3 +95,8 @@ E se pelo menos dois espaços foram removidos, então, o título do álbum possu
 
 ---
 
+# Semana 6:
+**_Exercício 3_**: O `ORDER BY` no final da _query_ foi utilizado para facilitar a visualização do ano com maior quantidade de álbuns lançados.
+**_Exercício 10_**: A função `lower` utilizada junto ao título foi utilizada para respeitar linguagens que são _case sensitive_.
+
+---
