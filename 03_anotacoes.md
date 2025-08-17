@@ -94,9 +94,46 @@ Se a diferença entre a quantidade de caracteres original e a quantidade de cara
 E se pelo menos dois espaços foram removidos, então, o título do álbum possui, no mínimo, três palavras.  
 
 ---
-
+  
 # Semana 6:
 **_Exercício 3_**: O `ORDER BY` no final da _query_ foi utilizado para facilitar a visualização do ano com maior quantidade de álbuns lançados.
 **_Exercício 10_**: A função `lower` utilizada junto ao título foi utilizada para respeitar linguagens que são _case sensitive_.
 
 ---
+
+# Semana 7:
+Como o objetivo da semana foi praticar os comandos DDL e DML, segue um breve descritivo das diferentes categorias de comando no SQL:
+
+### 📝 **Resumo: Categorias de comandos no SQL**
+|Linguagem | O que é | Exemplo de comandos |
+|----------|---------|---------------------|
+|**DDL** - Data Definition Language (Linguagem de Definição de Dados)| Comandos usados para definir ou alterar a estrutura do banco de dados e dos seus objetos, como tabelas e índices.| `CREATE`, `ALTER`, `DROP` |
+|**DML** - Data Manipulation Language (Linguagem de Manipulação de Dados)| Utilizada para manipular os dados que estão dentro da estrutura criada com o DDL. | `INSERT`, `UPDATE` |
+|**DQL** - Data Query Language (Linguagem de Consulta de Dados)| Focada consultar e recuperar dados do banco de dados. | `SELECT`|
+|**DCL** - Data Control Language (Linguagem de Controle de Dados)| Lida com a segurança e as permissões de acesso do banco de dados. | `GRANT`, `REVOKE` |
+|**DTL ou TCL** - Data Transaction Language (Linguagem de Transação de Dados)| Gerencia as transações em um banco de dados. Uma transação é um conjunto de operações que devem ser tratadas como uma única unidade.| `BEGIN TRANSACTION`, `ROLLBACK`|
+
+**_Sobre a expressão `CASE` utilizada nos exercícios:_**  
+Ideal para `UPDATES` onde várias linhas precisam ser atualizadas, mas cada uma receberá um valor diferente.  
+Também pode funcionar como uma estrutura condicional do tipo `IF-THEN-ELSE`.  
+_Sintaxe básica:_
+```sql
+CASE
+    WHEN condição_1 THEN resultado_1
+    WHEN condição_2 THEN resultado_2
+    ...
+    [ELSE resultado_alternativo]
+END
+```
+Onde:  
+* `CASE`: Inicia a cláusula.
+* `WHEN condição_ THEN _resultado`: Para cada condição que você quer verificar, use um `WHEN`. Se a condição for verdadeira, o `CASE` retorna o resultado correspondente. Você pode ter múltiplos `WHENs`. A primeira condição que for verdadeira é a que será usada, e o resto será ignorado.
+* `ELSE resultado_alternativo`: É opcional. Se nenhuma das condições `WHEN` for verdadeira, o valor do `ELSE` será retornado. Se você omitir o `ELSE` e nenhuma condição for verdadeira, o resultado será `NULL`.
+* `END`: Finaliza a cláusula.
+
+Nos exercícios, foi adicionada a cláusula `WHERE` no final para garantir que apenas as linhas desejadas serão atualizadas. Este `WHERE` pertence ao comando `UPDATE` e, se não for utilizada, o comando tentará atualizar todas as linhas da tabela, podendo causar erros.
+
+
+
+
+
