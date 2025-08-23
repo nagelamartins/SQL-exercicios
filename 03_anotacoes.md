@@ -133,6 +133,24 @@ Onde:
 
 Nos exercícios, foi adicionada a cláusula `WHERE` no final para garantir que apenas as linhas desejadas serão atualizadas. Este `WHERE` pertence ao comando `UPDATE` e, se não for utilizada, o comando tentará atualizar todas as linhas da tabela, podendo causar erros.
 
+---
+
+# Semana 8:
+
+**_Ordem de execução do `GROUP BY` e `HAVING`:_**  
+`WHERE` filtra antes de agrupar, `HAVING` filtra depois de agrupar.  
+No exercício 6, apesar de funcional, o ideal seria alterar o filtro `HAVING b.genero = 'Rock'` para o `WHERE` a fim de otimizar a consulta. Como a cláusula `WHERE` filtra as linhas antes de serem agrupadas, a operação se torna mais rápida do que filtrar os grupos com `HAVING`.  
+Uma querie alternativa e mais otimizada para o exercício é:  
+```sql
+SELECT b.nome AS banda, COUNT(a.titulo) AS qtd_albuns
+FROM bandas AS b
+JOIN albuns AS a ON b.id = a.banda_id
+WHERE b.genero = 'Rock'
+GROUP BY b.nome;
+```
+**_Uso de múltiplos JOINs:_**  
+Conforme as queries dos exercícios 8 e 9, que uniram três tabelas (bandas, albuns e integrantes), a lógica do uso de `JOIN` se mantém para múltiplas tabelas: É necessário conectar cada tabela à próxima usando a chave estrangeira (banda_id) que se refere à chave primária (id) da tabela anterior.  
+Funciona em cadeia: tabela A -> tabela B -> tabela C, com `JOINs` separados.
 
 
 
