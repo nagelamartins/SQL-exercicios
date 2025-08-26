@@ -8,7 +8,7 @@ Data: 26/08/2025
 -- 1. Conte quantos integrantes nasceram em cada década (1960, 1970, 1980, etc.).
 SELECT
      CASE
-		    WHEN YEAR(data_nascimento) BETWEEN 1930 AND 1939 THEN 'Decada_1930'
+		WHEN YEAR(data_nascimento) BETWEEN 1930 AND 1939 THEN 'Decada_1930'
         WHEN YEAR(data_nascimento) BETWEEN 1940 AND 1949 THEN 'Decada_1940'
         WHEN YEAR(data_nascimento) BETWEEN 1950 AND 1959 THEN 'Decada_1950'
         WHEN YEAR(data_nascimento) BETWEEN 1960 AND 1969 THEN 'Decada_1960'
@@ -38,7 +38,7 @@ WHERE b.ano = a.ano;
 -- 4. Mostre o nome de todas as bandas, o gênero musical e uma nova coluna chamada status que diga 'Clássica' se a banda foi fundada antes de 1980 e 'Moderna' se foi fundada em 1980 ou depois.
 SELECT nome, genero, 
 	CASE
-		WHEN ano < 1980 THEN 'Clássica'
+	WHEN ano < 1980 THEN 'Clássica'
     WHEN ano >= 1980 THEN 'Moderna'
 	END AS 'status'
 FROM bandas;
