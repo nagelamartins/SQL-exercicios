@@ -1,4 +1,6 @@
 # Semana 1: 
+
+### Uso de subqueries:
 **_Exercícios 8 e 9_**:  
 Como o ID das bandas é auto incrementável, em bancos de dados maiores não é seguro assumir seu valor manualmente.  
 A fim de evitar erros ao referenciar o valor na chave estrangeira, a melhor opção é inserir uma subquery que consulte qual é esse valor através de uma informação única, como o nome da banda.
@@ -113,7 +115,7 @@ Como o objetivo da semana foi praticar os comandos DDL e DML, segue um breve des
 |**DCL** - Data Control Language (Linguagem de Controle de Dados)| Lida com a segurança e as permissões de acesso do banco de dados. | `GRANT`, `REVOKE` |
 |**DTL ou TCL** - Data Transaction Language (Linguagem de Transação de Dados)| Gerencia as transações em um banco de dados. Uma transação é um conjunto de operações que devem ser tratadas como uma única unidade.| `BEGIN TRANSACTION`, `ROLLBACK`|
 
-**_Sobre a expressão `CASE` utilizada nos exercícios:_**  
+### Sobre a expressão `CASE` utilizada nos exercícios: 
 Ideal para `UPDATES` onde várias linhas precisam ser atualizadas, mas cada uma receberá um valor diferente.  
 Também pode funcionar como uma estrutura condicional do tipo `IF-THEN-ELSE`.  
 _Sintaxe básica:_
@@ -137,7 +139,7 @@ Nos exercícios, foi adicionada a cláusula `WHERE` no final para garantir que a
 
 # Semana 8:
 
-**_Ordem de execução do `GROUP BY` e `HAVING`:_**  
+### Ordem de execução do `GROUP BY` e `HAVING`:  
 `WHERE` filtra antes de agrupar, `HAVING` filtra depois de agrupar.  
 No exercício 6, apesar de funcional, o ideal seria alterar o filtro `HAVING b.genero = 'Rock'` para o `WHERE` a fim de otimizar a consulta. Como a cláusula `WHERE` filtra as linhas antes de serem agrupadas, a operação se torna mais rápida do que filtrar os grupos com `HAVING`.  
 Uma querie alternativa e mais otimizada para o exercício é:  
@@ -148,10 +150,51 @@ JOIN albuns AS a ON b.id = a.banda_id
 WHERE b.genero = 'Rock'
 GROUP BY b.nome;
 ```
-**_Uso de múltiplos JOINs:_**  
+### Uso de múltiplos JOINs: 
 Conforme as queries dos exercícios 8 e 9, que uniram três tabelas (bandas, albuns e integrantes), a lógica do uso de `JOIN` se mantém para múltiplas tabelas: É necessário conectar cada tabela à próxima usando a chave estrangeira (banda_id) que se refere à chave primária (id) da tabela anterior.  
 Funciona em cadeia: tabela A -> tabela B -> tabela C, com `JOINs` separados.
 
+---
 
+# Semana 9:
 
+### Função para calcular a idade a partir da data de nascimento no MySQL:  
+`TIMESTAMPDIFF()`: Calcula a diferença entre duas datas, em uma unidade de tempo especificada, como ano, por exemplo.  
+_Sintaxe básica:_
+```sql
+SELECT TIMESTAMPDIFF(YEAR, data_nascimento, CURDATE()) AS idade
+FROM tabela;
+```
+Onde: 
+* `YEAR`: Especifica a unidade de tempo na qual você quer a diferença, que neste caso é em anos.
+* `data_nascimento`: A coluna que contém a data de nascimento da pessoa.
+* `CURDATE()`: Retorna a data atual, que é usada como a data de referência para o cálculo.
+* `AS idade`: Cria um alias para a coluna calculada, tornando o resultado mais fácil de entender.
+
+### Novos usos da expressão `CASE`:
+**_Exercícios 1 e 4_:**  
+A cláusula `CASE` foi utilizada para criar novas colunas temporárias com base em uma classificação prévia dos dados. Para isso, é utilizado `END AS nome_da_coluna_temporária` no final da cláusula.  
+É importante, também, se atentar ao tipo de dado que se está utilizando junto com operações numéricas. Por exemplo: no exercício 1, a `data_nascimento` é um dado do tipo `DATE`, enquanto a operação `BETWEEN` trabalha com operações numéricas; por isso, antes de informar o campo `data_nascimento` junto ao `WHEN`, se faz necessário utilizar a função `YEAR()`:  
+A função `YEAR()` é usada para extrair o ano de uma data, permitindo que a comparação com `BETWEEN` funcione corretamente.
+
+### Sobre o exercício 7:
+Esse exercício exige juntar dados de três tabelas (bandas, albuns, integrantes) e, em seguida, filtrar entre anos de colunas diferentes.  
+**_Resolvendo o exercício passo a passo:_**  
+
+* **1º Passo (Juntar as tabelas)**: Necessário uma consulta que conecte a tabela bandas (para o nome da banda), albuns (para o ano de lançamento) e integrantes (para o ano de nascimento). Isso se resolve com `JOINs`.
+
+* **2º Passo (Encontrar a igualdade)**: Agora que as tabelas estão conectadas, é preciso encontrar as linhas onde o ano de nascimento do integrante é igual ao ano de lançamento do álbum. Isso é uma condição de filtro no `WHERE`.
+
+* **3º Passo (Eliminar duplicatas)**: Como uma banda pode ter vários álbuns e vários integrantes, a _query_ pode retornar o mesmo nome de banda várias vezes. Por isso se precisa garantir que cada banda apareça apenas uma vez utilizando a cláusula `DISTINCT`.
+
+**_Solução:_**
+
+```sql
+SELECT DISTINCT b.nome AS banda
+FROM bandas AS b
+JOIN albuns AS a ON b.id = a.banda_id
+JOIN integrantes AS i ON b.id = i.banda_id
+WHERE YEAR(i.data_nascimento) = a.ano;
+```
+No banco de dados utilizado, essa _query_ não retorna nenhum resultado, pois não existem integrantes com data de nascimento igual a uma data de lançamento de algum álbum. (E isso acabou me confundindo na execução).  
 
