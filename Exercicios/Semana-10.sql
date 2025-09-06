@@ -1,7 +1,7 @@
 /*
 Objetivos da Semana 10:
 - Praticar o uso de subqueries aninhadas;
-- Inserir o uso de funções de janela
+- Inserir o uso de window functions.
 
 Data: 06/06/2025
 */
