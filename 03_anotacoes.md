@@ -198,3 +198,60 @@ WHERE YEAR(i.data_nascimento) = a.ano;
 ```
 No banco de dados utilizado, essa _query_ não retorna nenhum resultado, pois não existem integrantes com data de nascimento igual a uma data de lançamento de algum álbum. (E isso acabou me confundindo na execução).  
 
+---
+
+# Semana 10:
+
+### Uso da cláusula `WITH`:
+O uso dessa cláusula é muito conhecido como Common Table Expression (CTE). Ela é utilizada para criar uma tabela temporária que só existe durante a execução de uma única consulta, tornando uma consulta complexa mais fácil de ler, entender e gerenciar. Ela pode substituir a necessidade de aninhar várias subconsultas na mesma consulta.  
+_Sintaxe básica:_
+```sql
+WITH nome_da_cte AS (
+  -- Consulta que gera a tabela temporária
+  SELECT coluna1, coluna2
+  FROM tabela_original
+  WHERE ...
+)
+-- Consulta principal que usa a CTE
+SELECT *
+FROM nome_da_cte
+WHERE ...;
+```
+
+### Introdução às Window Functions:
+As Window Functions (Funções de Janela) realizam cálculos em um grupo de linhas que estão relacionadas a uma linha específica, sem agrupar o resultado final da consulta.  
+São uma forma de usar uma função de agregação (`SUM`, `AVG`, `COUNT`) sem precisar usar o `GROUP BY`. As Window Functions mantêm todas as linhas originais e adicionam uma nova coluna com o resultado do cálculo.  
+A cláusula `OVER()`, utilizada em conjunto com a Função de Janela, define o conjunto de linhas sobre as quais a função vai operar.  
+_Sintaxe geral de uma Window Function:_  
+```sql
+Window_Function() OVER (PARTITION BY colunas ORDER BY colunas);
+```
+Onde:  
+* `Window_Function()`: A função que você será utilizada (SUM, AVG, ROW_NUMBER, etc.);
+* `OVER()`: A cláusula que indica que a query é uma função de janela;
+* `PARTITION BY` (opcional): Divide o conjunto de dados em partições (grupos). A função reinicia o cálculo para cada nova partição;
+* `ORDER BY` (obrigatório para algumas funções): Define a ordem das linhas dentro de cada partição.
+
+### Algumas das Window Functions mais utilizadas:
+|Função |	Sintaxe	| Para que serve |
+|-------|---------|----------------|
+|ROW_NUMBER() | ROW_NUMBER() OVER (PARTITION BY ... ORDER BY ...)	| Atribui um número sequencial único a cada linha dentro de uma partição. É perfeita para criar rankings onde não há empates.|
+|RANK()	| RANK() OVER (PARTITION BY ... ORDER BY ...)	| Atribui um ranking único. Em caso de empate, as linhas empatadas recebem a mesma posição, e a próxima linha "pula" as posições. Exemplo: 1, 2, 2, 4.|
+|DENSE_RANK()	| DENSE_RANK() OVER (PARTITION BY ... ORDER BY ...)	| Similar ao RANK(), mas sem pular posições. Empates recebem o mesmo número, e a próxima posição é consecutiva. Exemplo: 1, 2, 2, 3.|
+|SUM()	| SUM(coluna) OVER (PARTITION BY ... ORDER BY ...)	| Calcula a soma acumulada de um valor para cada linha, mantendo a estrutura original da tabela. É útil para mostrar totais em andamento.|
+|AVG()	| AVG(coluna) OVER (PARTITION BY ...)	| Calcula a média de um valor dentro de uma partição. Ideal para comparar o valor de uma linha com a média do seu grupo.|
+|LEAD()	| LEAD(coluna, offset) OVER (PARTITION BY ... ORDER BY ...)	| Permite acessar o valor da linha que está à frente da linha atual. Útil para comparar um valor com o próximo da sequência.|
+|LAG()	| LAG(coluna, offset) OVER (PARTITION BY ... ORDER BY ...)	| Permite acessar o valor da linha que está atrás da linha atual. Ideal para comparar um valor com o anterior.|
+
+**OBS:** O `offset` é um parâmetro opcional nas funções `LEAD()` e `LAG()` que define quantas linhas você quer olhar à frente ou atrás da linha atual.  
+Em outras palavras, ele especifica a "distância" da linha que você está analisando.  
+Na prática:  
+* `LAG(coluna, offset)`: Olha para a linha `offset` posições antes da linha atual.
+* `LEAD(coluna, offset)`: Olha para a linha `offset` posições depois da linha atual.
+
+Se o `offset` não for especificado, o valor padrão é 1. Ou seja, por padrão:
+
+* `LAG()` pega o valor da linha imediatamente anterior.
+* `LEAD()` pega o valor da linha imediatamente seguinte.
+
+_**No exercício 4**_ é utilizada a função de janela `ROW_NUMBER()`. A cláusula `PARTITION BY b.nome` divide os dados por banda, e a cláusula `ORDER BY a.ano` ranqueia os álbuns dentro de cada grupo. 
