@@ -3,7 +3,7 @@ Objetivos da Semana 10:
 - Praticar o uso de subqueries aninhadas;
 - Inserir o uso de window functions.
 
-Data: 06/06/2025
+Data: 06/09/2025
 */
 
 -- 1. Mostre o nome da banda, o título do álbum e o ano de formação, para todas as bandas que lançaram álbuns após o ano 2000.
