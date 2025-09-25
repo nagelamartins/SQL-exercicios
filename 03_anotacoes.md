@@ -255,3 +255,23 @@ Se o `offset` não for especificado, o valor padrão é 1. Ou seja, por padrão:
 * `LEAD()` pega o valor da linha imediatamente seguinte.
 
 _**No exercício 4**_ é utilizada a função de janela `ROW_NUMBER()`. A cláusula `PARTITION BY b.nome` divide os dados por banda, e a cláusula `ORDER BY a.ano` ranqueia os álbuns dentro de cada grupo. 
+
+---
+
+# Semana 11:
+
+**_Exercício 6_:**  
+A CTE `rank_albuns` criada com a cláusula `WITH` é necessária para numerar os álbuns de cada banda do mais antigo para o mais recente.  
+Na segunda parte, a condição fornecida pelo `WHERE ordem_albuns = 1` encontra o álbum listado como 1 pela `ROW_NUMBER`, ou seja, o mais antigo. Já para encontrar o álbum mais recente, é necessário encontrar o último número gerado pela `ROW_NUMBER` dentre os álbuns da banda analisada. Para isso, é usada a função `MAX()`. Para garantir que o `MAX()` de cada banda seja analizado individualmente, é importante correlacionar uma subquery com a consulta principal, usando a condição `WHERE r.banda = rank_albuns.banda`.  
+*_OBS:_* _Ainda é um exercício em que encontro dificuldades em resolver. Necessário praticar._
+
+**_Exercício 8_:**  
+Inserir o `JOIN` entre as tabelas `bandas` e `albuns` já se garante que somente as bandas que possuem álbuns cadastrados é que serão listadas, pois somente as linhas que têm correspondência nas duas tabelas serão retornadas. No momento da consulta, com o uso do `JOIN` foram retornadas 14 linhas. Sem o uso, a consulta retorna 16 linhas. 
+
+**_Exercício 9_:**  
+Por questão de segurança, o MySQL Workbench (usado para a prática do exercício) não permite fazer a exclusão de linhas usando como parâmetro instruções como `'%life%` sem desabilitar esse modo de segurança antes.  
+Para fazer essa exclusão de forma segura, sem precisar fazer essa desabilitação, portanto, utiliza-se a cláusula `LIMIT`. O `3` é passado como parâmetro pois, antes de fazer a exclusão, a quantidade de álbuns com a palavra 'life' no nome foi consultada, através da query:
+```sql
+SELECT titulo FROM albuns
+WHERE titulo LIKE '%life%';
+```
