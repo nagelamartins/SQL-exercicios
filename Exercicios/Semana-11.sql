@@ -4,7 +4,7 @@ Objetivos da Semana 11:
 - Reforçar o uso de window functions;
 - Revisar conceitos. 
 
-Data: 23/09/2025
+Datas: 23/09/2025, 25/09/2025
 */
 
 -- 1. Encontre as bandas que têm pelo menos um integrante com um id menor que 10.
@@ -32,7 +32,7 @@ JOIN integrantes AS i
 ON b.id = i.banda_id
 WHERE b.ano BETWEEN 1960 AND 1980;
 
--- 5. Liste os nomes das bandas com mais de 3 álbuns, sem usar uma subquery na cláusula HAVING.
+-- 5. Liste os nomes das bandas com mais de 3 álbuns.
 SELECT b.nome, count(a.titulo) AS qtdd_albuns FROM bandas AS b
 JOIN albuns AS a
 ON b.id = a.banda_id
@@ -55,9 +55,23 @@ OR ordem_albuns = (
     );
 
 -- 7. Encontre todos os álbuns que foram lançados no mesmo ano de nascimento de qualquer integrante da banda Black Sabbath.
+SELECT a.titulo, a.ano FROM albuns AS a
+JOIN integrantes AS i
+ON a.banda_id = i.banda_id
+WHERE a.ano IN (SELECT YEAR(data_nascimento) FROM integrantes WHERE banda_id = (SELECT id FROM bandas WHERE nome = 'Black Sabbath'));
 
 -- 8. Liste as bandas de Rock que têm pelo menos um álbum cadastrado.
+SELECT DISTINCT b.nome FROM albuns AS a
+JOIN bandas AS b
+ON a.banda_id = b.id
+WHERE b.genero = 'Rock';
 
--- 9. Exclua todos os álbuns que têm a palavra "Live" no título.
+-- 9. Exclua todos os álbuns que têm a palavra "life" no título.
+DELETE FROM albuns
+WHERE titulo LIKE '%life%'
+LIMIT 3;
 
 -- 10. Atualize a nacionalidade da banda Audioslave para EUA/Inglaterra.
+UPDATE bandas
+SET nacionalidade = 'EUA/Inglaterra'
+WHERE nome = 'Audioslave';
