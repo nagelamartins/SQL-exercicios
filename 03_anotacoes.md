@@ -275,3 +275,65 @@ Para fazer essa exclusão de forma segura, sem precisar fazer essa desabilitaç�
 SELECT titulo FROM albuns
 WHERE titulo LIKE '%life%';
 ```
+
+---
+
+# Semana 12:
+### Ajustes no Banco de Dados:
+Foram adicionados novos integrantes e novos álbuns para as bandas já cadastradas:
+```sql
+INSERT INTO integrantes (id, nome, banda_id, instrumento, membro_atual, data_nascimento) VALUES
+(default, 'Kyo', (SELECT id FROM bandas WHERE nome = 'Dir en Grey'), 'vocal', 'S', '1976-02-16'),
+(default, 'Kaoru', (SELECT id FROM bandas WHERE nome = 'Dir en Grey'), 'guitarra', 'S', '1974-02-17'), 
+(default, 'Die', (SELECT id FROM bandas WHERE nome = 'Dir en Grey'), 'guitarra', 'S', '1974-12-20'),
+(default, 'Toshiya', (SELECT id FROM bandas WHERE nome = 'Dir en Grey'), 'baixo', 'S', '1977-03-31'),  
+(default, 'Shinya', (SELECT id FROM bandas WHERE nome = 'Dir en Grey'), 'bateria', 'S', '1978-02-24'), 
+(default, 'Nasi', (SELECT id FROM bandas WHERE nome = 'Ira!'), 'vocal', 'S', '1962-01-23'),
+(default, 'Edgard Scandurra', (SELECT id FROM bandas WHERE nome = 'Ira!'), 'guitarra', 'S', '1962-02-05'),
+(default, 'Ricardo Gaspa', (SELECT id FROM bandas WHERE nome = 'Ira!'), 'baixo', 'N', '0000-00-00'),
+(default, 'André Jung', (SELECT id FROM bandas WHERE nome = 'Ira!'), 'bateria', 'N', '1961-05-12'),
+(default, 'Steve Harris', (SELECT id FROM bandas WHERE nome = 'Iron Maiden'), 'baixo', 'S', '1956-03-12'),
+(default, 'Dave Murray', (SELECT id FROM bandas WHERE nome = 'Iron Maiden'), 'guitarra', 'S', '1956-12-23'),
+(default, 'Adrian Smith', (SELECT id FROM bandas WHERE nome = 'Iron Maiden'), 'guitarra', 'S', '1957-02-27'),
+(default, 'Bruce Dickinson', (SELECT id FROM bandas WHERE nome = 'Iron Maiden'), 'vocal', 'S', '1958-08-07'),
+(default, 'Nicko McBrain', (SELECT id FROM bandas WHERE nome = 'Iron Maiden'), 'bateria', 'S', '1952-06-05'),
+(default, 'Janick Gers', (SELECT id FROM bandas WHERE nome = 'Iron Maiden'), 'guitarra', 'S', '1957-01-27'),
+(default, 'Paul Di Anno', (SELECT id FROM bandas WHERE nome = 'Iron Maiden'), 'vocal', 'N', '1958-05-17'),
+(default, 'Robert Plant', (SELECT id FROM bandas WHERE nome = 'Led Zeppelin'), 'vocal', 'N', '1948-08-20'),
+(default, 'Jimmy Page', (SELECT id FROM bandas WHERE nome = 'Led Zeppelin'), 'guitarra', 'N', '1944-01-09'),
+(default, 'John Paul Jones', (SELECT id FROM bandas WHERE nome = 'Led Zeppelin'), 'baixo', 'N', '1946-01-03'),
+(default, 'John Bonham', (SELECT id FROM bandas WHERE nome = 'Led Zeppelin'), 'bateria', 'N', '1948-05-31');
+```
+```sql
+INSERT INTO albuns (id, titulo, ano, banda_id) VALUES 
+(default, 'Holy Land', 1996, (SELECT id FROM bandas WHERE nome = 'Angra')),
+(default, 'Fireworks', 1998, (SELECT id FROM bandas WHERE nome = 'Angra')),
+(default, 'Temple of Shadows', 2004, (SELECT id FROM bandas WHERE nome = 'Angra')),
+(default, 'Master of Reality', 1971, (SELECT id FROM bandas WHERE nome = 'Black Sabbath')),
+(default, 'Vol. 4', 1972, (SELECT id FROM bandas WHERE nome = 'Black Sabbath')),
+(default, 'Sabotage', 1975, (SELECT id FROM bandas WHERE nome = 'Black Sabbath')),
+(default, 'Battalions of Fear', 1988, (SELECT id FROM bandas WHERE nome = 'Blind Guardian')),
+(default, 'Somewhere Far Beyond', 1992, (SELECT id FROM bandas WHERE nome = 'Blind Guardian')),
+(default, 'Nightfall in Middle-Earth', 1998, (SELECT id FROM bandas WHERE nome = 'Blind Guardian')),
+(default, 'A Night At The Opera', 2002, (SELECT id FROM bandas WHERE nome = 'Blind Guardian')),
+(default, 'In Rock', 1970, (SELECT id FROM bandas WHERE nome = 'Deep Purple')),
+(default, 'Perfect Strangers', 1984, (SELECT id FROM bandas WHERE nome = 'Deep Purple')),
+(default, 'Speak & Spell', 1981, (SELECT id FROM bandas WHERE nome = 'Depeche Mode')),
+(default, 'Songs of Faith and Devotion', 1993, (SELECT id FROM bandas WHERE nome = 'Depeche Mode')),
+(default, 'Ultra', 1997, (SELECT id FROM bandas WHERE nome = 'Depeche Mode')),
+(default, 'Exciter', 2001, (SELECT id FROM bandas WHERE nome = 'Depeche Mode')),
+(default, 'Gauze', 1999, (SELECT id FROM bandas WHERE nome = 'Dir en Grey')),
+(default, 'Macabre', 2000, (SELECT id FROM bandas WHERE nome = 'Dir en Grey')),
+(default, 'Vulgar', 2003, (SELECT id FROM bandas WHERE nome = 'Dir en Grey')),
+(default, 'Meninos da Rua Paulo', 1991, (SELECT id FROM bandas WHERE nome = 'Ira!')),
+(default, 'Entre Seus Rins', 2001, (SELECT id FROM bandas WHERE nome = 'Ira!')),
+(default, 'Iron Maiden', 1980, (SELECT id FROM bandas WHERE nome = 'Iron Maiden')),
+(default, 'Killers', 1981, (SELECT id FROM bandas WHERE nome = 'Iron Maiden')),
+(default, 'Powerslave', 1984, (SELECT id FROM bandas WHERE nome = 'Iron Maiden')),
+(default, 'Somewhere in Time', 1986, (SELECT id FROM bandas WHERE nome = 'Iron Maiden')),
+(default, 'Kill Em All', 1983, (SELECT id FROM bandas WHERE nome = 'Metallica')),
+(default, 'Ride the Lightning', 1984, (SELECT id FROM bandas WHERE nome = 'Metallica')),
+(default, 'Metallica (The Black Album)', 1983, (SELECT id FROM bandas WHERE nome = 'Metallica')),
+(default, 'Overkill', 1979, (SELECT id FROM bandas WHERE nome = 'Motorhead')),
+(default, 'Bomber', 1979, (SELECT id FROM bandas WHERE nome = 'Motorhead'));
+```
