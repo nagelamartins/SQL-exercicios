@@ -302,7 +302,11 @@ INSERT INTO integrantes (id, nome, banda_id, instrumento, membro_atual, data_nas
 (default, 'Robert Plant', (SELECT id FROM bandas WHERE nome = 'Led Zeppelin'), 'vocal', 'N', '1948-08-20'),
 (default, 'Jimmy Page', (SELECT id FROM bandas WHERE nome = 'Led Zeppelin'), 'guitarra', 'N', '1944-01-09'),
 (default, 'John Paul Jones', (SELECT id FROM bandas WHERE nome = 'Led Zeppelin'), 'baixo', 'N', '1946-01-03'),
-(default, 'John Bonham', (SELECT id FROM bandas WHERE nome = 'Led Zeppelin'), 'bateria', 'N', '1948-05-31');
+(default, 'John Bonham', (SELECT id FROM bandas WHERE nome = 'Led Zeppelin'), 'bateria', 'N', '1948-05-31'),
+(default, 'John Lennon', (SELECT id FROM bandas WHERE nome = 'The Beatles'), 'vocal/guitarra', 'N', '1940-10-09'),
+(default, 'Paul McCartney', (SELECT id FROM bandas WHERE nome = 'The Beatles'), 'vocal/baixo', 'N', '1942-06-18'),
+(default, 'George Harrison', (SELECT id FROM bandas WHERE nome = 'The Beatles'), 'vocal/guitarra', 'N', '1943-02-25'),
+(default, 'Ringo Starr', (SELECT id FROM bandas WHERE nome = 'The Beatles'), 'vocal/bateria', 'N', '1940-07-07');
 ```
 ```sql
 INSERT INTO albuns (id, titulo, ano, banda_id) VALUES 
