@@ -20,6 +20,17 @@ ON a.banda_id = b.id
 WHERE b.nacionalidade != 'EUA';
 
 -- 3. Conte quantos álbuns cada nacionalidade possui, mas apenas para as nacionalidades que têm um número de álbuns acima da média geral de álbuns por nacionalidade.
+WITH contagem_albuns_nacionalidade AS (
+	SELECT b.nacionalidade, COUNT(a.titulo) AS quantidade_albuns FROM albuns AS a
+	JOIN bandas AS b 
+  ON a.banda_id = b.id
+	GROUP BY b.nacionalidade
+)
+SELECT nacionalidade, quantidade_albuns FROM contagem_albuns_nacionalidade
+WHERE quantidade_albuns > (
+	SELECT AVG(quantidade_albuns)
+	FROM contagem_albuns_nacionalidade
+	);
 
 -- 4. Encontre as bandas que têm pelo menos um integrante cujo instrumento contém a palavra "vocal".
 SELECT DISTINCT b.nome FROM bandas AS b
