@@ -341,3 +341,15 @@ INSERT INTO albuns (id, titulo, ano, banda_id) VALUES
 (default, 'Overkill', 1979, (SELECT id FROM bandas WHERE nome = 'Motorhead')),
 (default, 'Bomber', 1979, (SELECT id FROM bandas WHERE nome = 'Motorhead'));
 ```
+---
+
+# Semana 13:
+
+**_Exercício 7_:**   
+Acabei formulando uma query que resolve a questão "gêneros com mais de 2 álbuns", e não "gêneros com mais de 2 bandas".
+Para resolver a questão correta, então, a query é:
+```sql
+SELECT genero, COUNT(nome) AS qtdd_bandas FROM bandas
+GROUP BY genero
+HAVING qtdd_bandas > 2;
+```
