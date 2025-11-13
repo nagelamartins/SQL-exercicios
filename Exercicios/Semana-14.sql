@@ -2,20 +2,62 @@
 Objetivo da Semana 14:
 - Praticar o uso de CTEs. 
 
-Data: 
+Datas: 13/11/25 - em andamento
 */
 
--- 1. CTE Simples: Crie uma CTE chamada bandas_recentes que liste todas as bandas fundadas após o ano 1970. Em seguida, use uma SELECT simples para exibir o nome e o ano de fundação dessa CTE.
+-- 1. CTE Simples: Crie uma CTE chamada bandas_recentes que liste todas as bandas fundadas após o ano 1970. 
+-- Em seguida, use uma SELECT simples para exibir o nome e o ano de fundação dessa CTE.
+WITH bandas_recentes AS (
+	SELECT nome, ano FROM bandas
+  WHERE ano > 1970
+)    
+SELECT nome, ano FROM bandas_recentes;
 
--- 2. CTE + Agregação Básica: Crie uma CTE chamada dados_albuns que liste o título e o ano de lançamento de todos os álbuns. Em seguida, use uma SELECT na sua CTE para contar quantos álbuns foram lançados após o ano 2000.
+-- 2. CTE + Agregação Básica: Crie uma CTE chamada dados_albuns que liste o título e o ano de lançamento de todos os álbuns.
+-- Em seguida, use uma SELECT na sua CTE para contar quantos álbuns foram lançados após o ano 2000.
+WITH dados_albuns AS (
+	SELECT titulo, ano FROM albuns
+)
+SELECT count(titulo) AS qtdd_albuns FROM dados_albuns
+WHERE ano > 2000;
 
--- 3. CTE para Filtragem de Grupos: Crie uma CTE chamada albuns_por_banda que conte o número de álbuns para cada banda. Em seguida, use uma SELECT na sua CTE para listar apenas as bandas que possuem mais de 3 álbuns.
+-- 3. CTE para Filtragem de Grupos: Crie uma CTE chamada albuns_por_banda que conte o número de álbuns para cada banda. 
+-- Em seguida, use uma SELECT na sua CTE para listar apenas as bandas que possuem mais de 3 álbuns.
+WITH albuns_por_banda AS (
+	SELECT b.nome AS banda, count(a.titulo) AS qtdd_albuns FROM bandas AS b
+	JOIN albuns AS a
+	ON b.id = a.banda_id
+	GROUP BY banda
+)
+SELECT banda FROM albuns_por_banda
+WHERE qtdd_albuns > 3;
 
--- 4. CTE para Junção Simples: Crie uma CTE chamada integrantes_antigos que liste os nomes dos integrantes nascidos antes de 1960. Em seguida, junte esta CTE com a tabela bandas para mostrar o nome da banda e o nome de cada integrante antigo.
+-- 4. CTE para Junção Simples: Crie uma CTE chamada integrantes_antigos que liste os nomes dos integrantes nascidos antes de 1960. 
+-- Em seguida, junte esta CTE com a tabela bandas para mostrar o nome da banda e o nome de cada integrante antigo.
+WITH integrantes_antigos AS (
+	SELECT banda_id, nome, data_nascimento FROM integrantes
+	WHERE YEAR(data_nascimento) < 1960
+)
+SELECT b.nome AS banda, i.nome AS integrante FROM bandas AS b
+JOIN integrantes_antigos AS i
+ON b.id = i.banda_id;
 
--- 5. Duas CTEs em Sequência: Crie uma CTE (contagem_integrantes) que conte quantos integrantes cada banda tem. Em seguida, crie uma segunda CTE (bandas_pequenas) que liste as bandas que têm menos de 4 integrantes. Finalmente, exiba o resultado da segunda CTE.
+-- 5. Duas CTEs em Sequência: Crie uma CTE (contagem_integrantes) que conte quantos integrantes cada banda tem. 
+-- Em seguida, crie uma segunda CTE (bandas_pequenas) que liste as bandas que têm menos de 4 integrantes. Finalmente, exiba o resultado da segunda CTE.
+WITH contagem_integrantes AS (
+	SELECT b.nome AS banda, COUNT(i.nome) AS qtdd_integrantes FROM bandas AS b
+	JOIN integrantes AS i
+	ON b.id = i.banda_id
+	GROUP BY banda
+),
+bandas_pequenas AS (
+	SELECT banda, qtdd_integrantes FROM contagem_integrantes 
+	WHERE qtdd_integrantes < 4
+)
+SELECT * FROM bandas_pequenas;
 
--- 6. CTE para MAX/MIN: Crie uma CTE chamada ano_mais_antigo que encontre o ano do álbum mais antigo para cada banda. Em seguida, use esta CTE para listar o nome da banda e o título do álbum que corresponde a esse ano mais antigo. (Dica: Você precisará juntar a CTE de volta com a tabela albuns para pegar o título.)
+-- 6. CTE para MAX/MIN: Crie uma CTE chamada ano_mais_antigo que encontre o ano do álbum mais antigo para cada banda.
+-- Em seguida, use esta CTE para listar o nome da banda e o título do álbum que corresponde a esse ano mais antigo. (Dica: Você precisará juntar a CTE de volta com a tabela albuns para pegar o título.)
 
 -- 7. CTE com Função de Janela: Crie uma CTE chamada ranking_albuns que utilize a função de janela ROW_NUMBER() para ranquear os álbuns de cada banda (1 para o mais antigo, 2 para o segundo mais antigo, etc.). Em seguida, use esta CTE para listar o nome da banda e o título do seu segundo álbum mais antigo (posição 2).
 
